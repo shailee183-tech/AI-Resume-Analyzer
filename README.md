@@ -1,87 +1,93 @@
-# Welcome to React Router!
+# AI Resume Analyzer
 
-A modern, production-ready template for building full-stack React applications using React Router.
+AI Resume Analyzer is a web application that helps job seekers evaluate their resumes against specific job descriptions. Users can upload a resume in PDF format, receive AI-powered feedback, and review resume scores and improvement suggestions.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+## Live Demo
 
-## Features
-
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
-
-## Getting Started
-
-### Installation
-
-Install the dependencies:
-
-```bash
-npm install
-```
-
-### Development
-
-Start the development server with HMR:
-
-```bash
-npm run dev
-```
-
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
-
-```bash
-npm run build
-```
-
-## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
-
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+🔗 **Deployment Link:**  
+https://airesumeanalyzer-c5upsq72r-shailee.vercel.app/
 
 ---
 
-Built with ❤️ using React Router.
+## Features
+
+- Upload resumes in PDF format
+- Convert PDF resumes into image previews
+- AI-powered resume analysis
+- ATS score evaluation
+- Resume feedback and improvement suggestions
+- Resume history tracking
+- Secure cloud storage using Puter.js
+- Responsive and modern user interface
+
+---
+
+## Tech Stack
+
+### Frontend
+- React
+- TypeScript
+- React Router
+- Zustand
+- Tailwind CSS
+
+### AI & Storage
+- Puter.js
+- AI Chat Integration
+
+### PDF Processing
+- PDF.js (`pdfjs-dist`)
+
+---
+
+## Project Structure
+
+```bash
+app/
+├── components/
+├── routes/
+├── lib/
+├── types/
+├── constants/
+└── app.css
+Installation
+Clone the Repository
+git clone https://github.com/your-username/AI_Resume_Analyzer.git
+cd AI_Resume_Analyzer
+Install Dependencies
+npm install
+Run Development Server
+npm run dev
+
+Open:
+
+http://localhost:5173
+Usage
+Sign in using Puter authentication.
+Navigate to the Upload page.
+Enter:
+Company Name
+Job Title
+Job Description
+Upload a PDF resume.
+Click Analyze Resume.
+View ATS score, feedback, and improvement suggestions.
+Access previously analyzed resumes from the dashboard.
+Key Functionalities
+Resume Upload
+PDF-to-Image Conversion
+AI Resume Review
+ATS Scoring
+Resume Preview Generation
+Feedback Storage and Retrieval
+Resume History Management
+Future Improvements
+Multiple resume templates
+Resume comparison
+Downloadable feedback reports
+Enhanced ATS analysis
+Additional AI models
+Author
+
+Shailee Singh
+Computer Science Engineering Student
