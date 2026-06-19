@@ -1,37 +1,100 @@
 import { Link } from "react-router";
-import ScoreCircle from "./ScoreCircle";
+import ScoreCircle from "~/components/ScoreCircle";
+import { useEffect, useState } from "react";
+import { usePuterStore } from "~/lib/puter";
 
-const ResumeCard = ({ resume: { id, companyName, jobTitle, feedback,imagePath } }: { resume: Resume }) => {
+const ResumeCard = ({
+    resume: { id, companyName, jobTitle, feedback, imagePath },
+}: {
+    resume: Resume;
+}) => {
+    const { fs } = usePuterStore();
+
+    const [resumeUrl, setResumeUrl] = useState("");
+
+    useEffect(() => {
+        const loadResume = async () => {
+            try {
+                if (!imagePath) return;
+
+                const blob = await fs.read(imagePath);
+
+                if (!blob) return;
+
+                const url = URL.createObjectURL(blob);
+                setResumeUrl(url);
+            } catch (error) {
+                console.error("Resume image error:", error);
+            }
+        };
+
+        loadResume();
+    }, [imagePath, fs]);
+
+    let parsedFeedback: any = { overallScore: 0 };
+
+    try {
+        if (typeof feedback === "string" && feedback !== "") {
+            parsedFeedback = JSON.parse(feedback);
+        } else if (feedback) {
+            parsedFeedback = feedback;
+        }
+    } catch (err) {
+        console.error("Invalid feedback:", feedback);
+    }
+
     return (
-        <Link to={`/resume/${id}`} className="resume-card animate-in fade-in duration-1000">
+        <Link
+            to={`/resume/${id}`}
+            className="resume-card animate-in fade-in duration-1000"
+        >
             <div className="resume-card-header">
-                <div className="flex-1 min-w-0 flex flex-col gap-2">
-                    <h2 className="font-bold text-black wrap-break-words">
-                        {companyName}
-                    </h2>
+                <div className="flex flex-col gap-2">
+                    {companyName && (
+                        <h2 className="text-black! font-bold wrap-break-word">
+                            {companyName}
+                        </h2>
+                    )}
 
-                    <h3 className="text-lg text-gray-500 wrap-break-words">
-                        {jobTitle}
-                    </h3>
+                    {jobTitle && (
+                        <h3 className="text-lg wrap-break-word text-gray-500">
+                            {jobTitle}
+                        </h3>
+                    )}
+
+                    {!companyName && !jobTitle && (
+                        <h2 className="text-black! font-bold">
+                            Resume
+                        </h2>
+                    )}
                 </div>
+
                 <div className="shrink-0">
-                    <ScoreCircle score={feedback.overallScore} />
+                    <ScoreCircle
+                        score={parsedFeedback?.overallScore || 0}
+                    />
                 </div>
             </div>
 
-            <div className="gradient-border animate-in fade-in duration-1000">
-                <div className="w-full h-full">
-                    <img
-                    src={imagePath}
-                    alt = "resume"
-                    className="w-full h-125 object-contain object-top bg-white"
-                    />
-                     </div>
-
-            </div>
-
+            {resumeUrl ? (
+                <div className="gradient-border animate-in fade-in duration-1000">
+                    <div className="w-full h-full">
+                        <img
+                            src={resumeUrl}
+                            alt="resume"
+                            className="w-full h-88 max-sm:h-50 object-cover object-top"
+                        />
+                    </div>
+                </div>
+            ) : (
+                <div className="gradient-border h-88 flex items-center justify-center">
+                    <p className="text-gray-500">
+                        Resume preview unavailable
+                    </p>
+                </div>
+            )}
         </Link>
-    )
-}
+    );
+};
 
-export default ResumeCard
+export default ResumeCard;
