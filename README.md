@@ -33,7 +33,6 @@ https://airesumeanalyzer-c5upsq72r-shailee.vercel.app/
 
 ### AI & Storage
 - Puter.js
-- AI Chat Integration
 
 ### PDF Processing
 - PDF.js (`pdfjs-dist`)
